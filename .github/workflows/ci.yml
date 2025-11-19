@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.11]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f "anunnakis_roteiros/requirements.txt" ]; then pip install -r anunnakis_roteiros/requirements.txt; fi
+
+    - name: Run tests (if any)
+      run: |
+        if [ -d "test" ]; then
+          python -m pip install pytest
+          pytest -q
+        else
+          echo "No tests directory found; skipping pytest."
+        fi
+
+    - name: Lint (flake8, optional)
+      continue-on-error: true
+      run: |
+        python -m pip install flake8
+        flake8 anunnakis_roteiros || true
