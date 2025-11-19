@@ -48,3 +48,18 @@ Sem licença especificada. Adicione um arquivo `LICENSE` se desejar tornar o pro
 
 ---
 Se quiser, eu posso adicionar instruções mais detalhadas (ex.: variáveis de ambiente, como ajustar `image_dir`, ou integração com APIs externas).
+
+## Exemplos rápidos
+
+- Buscar term "annunaki" (GUI): inicie a aplicação e use a aba "Scraper"; selecione `Max Images = 10` e clique em iniciar.
+- Executar via linha de comando (sem GUI) — atualmente a aplicação é orientada por GUI; para testes rápidos, rode `run.py` e use a interface.
+
+## Ajustes e personalização
+
+- Para alterar o diretório de destino padrão, defina via código `ImageScraper.set_image_dir(path)` ou modifique o parâmetro `image_dir` ao instanciar `ImageScraper`.
+- Para aceitar imagens menores altere o parâmetro `high_res` para `False` ou ajuste `min_dimension` no código (não recomendado sem testes).
+
+## Notas sobre duplicatas
+
+- O mecanismo de deduplicação usa MD5 do conteúdo e armazena no SQLite. Se quiser forçar salvar imagens mesmo quando duplicadas, posso adicionar uma flag `force` ao scraper.
+
