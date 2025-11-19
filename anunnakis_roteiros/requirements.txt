@@ -1,0 +1,8 @@
+pyside6
+google-genai
+requests
+beautifulsoup4
+Pillow
+sqlite-utils
+python-dotenv
+icrawler
